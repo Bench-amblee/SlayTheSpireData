@@ -1,0 +1,13 @@
+@echo off
+echo Starting Slay the Spire Analyzer Backend...
+cd backend
+if not exist venv (
+    echo Creating virtual environment...
+    python -m venv venv
+)
+call venv\Scripts\activate
+echo Installing dependencies...
+pip install -r requirements.txt
+pip install "websockets>=13.0"
+echo Starting Flask server...
+python app.py

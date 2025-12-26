@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(python:*)",
+      "Bash(venv/Scripts/python:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(del extract_cards.py)",
+      "Bash(rd:*)",
+      "Bash(rm:*)",
+      "Bash(cat:*)",
+      "Bash(pip show:*)",
+      "Bash(venvScriptspip install websockets --upgrade)",
+      "Bash(venvScriptspip install \"websockets>=13.0\")",
+      "Bash(timeout:*)",
+      "Bash(venvScripts:*)",
+      "Bash(ping:*)",
+      "Bash(curl:*)",
+      "Bash(tasklist)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
