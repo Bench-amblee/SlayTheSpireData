@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, Area, AreaChart } from 'recharts'
+import { API_URL } from '../config'
 
 function Dashboard() {
   const [stats, setStats] = useState(null)
@@ -32,8 +33,8 @@ function Dashboard() {
       if (filters.ignoreDownfall !== '') params.ignore_downfall = filters.ignoreDownfall
 
       const [statsResponse, runsResponse] = await Promise.all([
-        axios.get('http://localhost:5000/api/stats', { params }),
-        axios.get('http://localhost:5000/api/runs', { params })
+        axios.get(`${API_URL}/api/stats`, { params }),
+        axios.get(`${API_URL}/api/runs`, { params })
       ])
 
       setStats(statsResponse.data)

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getCardCharacter, CharacterIcon } from '../utils/characterMapping.jsx'
+import { API_URL } from '../config'
 
 function Cards() {
   const [cards, setCards] = useState([])
@@ -31,7 +32,7 @@ function Cards() {
       if (filters.isDaily !== '') params.is_daily = filters.isDaily
       if (filters.ignoreDownfall !== '') params.ignore_downfall = filters.ignoreDownfall
 
-      const response = await axios.get('http://localhost:5000/api/cards', { params })
+      const response = await axios.get(`${API_URL}/api/cards`, { params })
       setCards(response.data)
     } catch (error) {
       console.error('Error fetching cards:', error)

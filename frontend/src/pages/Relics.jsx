@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getRelicCharacter, CharacterIcon } from '../utils/characterMapping.jsx'
+import { API_URL } from '../config'
 
 function Relics() {
   const [relics, setRelics] = useState([])
@@ -29,7 +30,7 @@ function Relics() {
       if (filters.isDaily !== '') params.is_daily = filters.isDaily
       if (filters.ignoreDownfall !== '') params.ignore_downfall = filters.ignoreDownfall
 
-      const response = await axios.get('http://localhost:5000/api/relics', { params })
+      const response = await axios.get(`${API_URL}/api/relics`, { params })
       setRelics(response.data)
     } catch (error) {
       console.error('Error fetching relics:', error)

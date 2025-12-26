@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { API_URL } from '../config'
 
 function Advanced() {
   const [correlationData, setCorrelationData] = useState(null)
@@ -29,8 +30,8 @@ function Advanced() {
       if (filters.victory !== '') params.victory = filters.victory
 
       const [corrResponse, topResponse] = await Promise.all([
-        axios.get('http://localhost:5000/api/correlation', { params }),
-        axios.get('http://localhost:5000/api/correlation/top', { params })
+        axios.get(`${API_URL}/api/correlation`, { params }),
+        axios.get(`${API_URL}/api/correlation/top`, { params })
       ])
 
       setCorrelationData(corrResponse.data)

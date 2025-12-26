@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../config';
 
 function Upload() {
   const [files, setFiles] = useState([]);
@@ -26,7 +27,7 @@ function Upload() {
   useEffect(() => {
     const checkSupabase = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/supabase/status');
+        const response = await axios.get(`${API_URL}/api/supabase/status`);
         setSupabaseStatus(response.data);
       } catch (err) {
         console.error('Failed to check Supabase status:', err);
@@ -44,10 +45,10 @@ function Upload() {
     setError(null);
 
     try {
-      await axios.post('http://localhost:5000/api/supabase/wake');
+      await axios.post(`${API_URL}/api/supabase/wake`);
 
       // Check status again after waking
-      const response = await axios.get('http://localhost:5000/api/supabase/status');
+      const response = await axios.get(`${API_URL}/api/supabase/status`);
       setSupabaseStatus(response.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to wake database');
@@ -115,7 +116,7 @@ function Upload() {
     });
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload-runs', formData, {
+      const response = await axios.post(`${API_URL}/api/upload-runs`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

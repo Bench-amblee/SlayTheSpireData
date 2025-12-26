@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './AllRuns.css'
+import { API_URL } from '../config'
 
 function AllRuns() {
   const [runs, setRuns] = useState([])
@@ -35,7 +36,7 @@ function AllRuns() {
       if (filters.isDaily !== '') params.is_daily = filters.isDaily
       if (filters.ignoreDownfall !== '') params.ignore_downfall = filters.ignoreDownfall
 
-      const response = await axios.get('http://localhost:5000/api/runs', { params })
+      const response = await axios.get(`${API_URL}/api/runs`, { params })
       setRuns(response.data)
     } catch (error) {
       console.error('Error fetching runs:', error)
