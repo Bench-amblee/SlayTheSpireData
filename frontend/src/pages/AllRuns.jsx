@@ -20,10 +20,10 @@ function AllRuns() {
 
   // Character image imports - replace these with actual images
   const characterImages = {
-    'IRONCLAD': '/src/assets/characters/ironclad.png',
-    'THE_SILENT': '/src/assets/characters/silent.png',
-    'DEFECT': '/src/assets/characters/defect.png',
-    'WATCHER': '/src/assets/characters/watcher.png'
+    'IRONCLAD': '/characters/ironclad.png',
+    'THE_SILENT': '/characters/silent.png',
+    'DEFECT': '/characters/defect.png',
+    'WATCHER': '/characters/watcher.png'
   }
 
   const fetchRuns = async () => {
