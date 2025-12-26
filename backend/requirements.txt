@@ -19,7 +19,7 @@ h11==0.16.0
 h2==4.3.0
 hpack==4.1.0
 httpcore==1.0.9
-httpx<0.28,>=0.24
+httpx<0.29,>=0.26
 hyperframe==6.1.0
 idna==3.11
 itsdangerous==2.2.0
@@ -58,7 +58,6 @@ strictyaml==1.7.3
 supabase==2.27.0
 supabase-auth==2.27.0
 supabase-functions==2.27.0
-supafunc==0.3.3
 tenacity==9.1.2
 typing-inspection==0.4.2
 typing_extensions==4.15.0
