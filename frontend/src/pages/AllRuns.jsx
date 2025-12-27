@@ -15,6 +15,7 @@ function AllRuns() {
     isDaily: '',
     ignoreDownfall: 'true'
   })
+  const [sortOrder, setSortOrder] = useState('oldest')
 
   const RUNS_PER_PAGE = 15
 
@@ -101,11 +102,20 @@ function AllRuns() {
     setTimeout(() => fetchRuns(), 0)
   }
 
+  // Sort runs based on sortOrder
+  const sortedRuns = [...runs].sort((a, b) => {
+    if (sortOrder === 'newest') {
+      return b.timestamp - a.timestamp
+    } else {
+      return a.timestamp - b.timestamp
+    }
+  })
+
   // Pagination calculations
-  const totalPages = Math.ceil(runs.length / RUNS_PER_PAGE)
+  const totalPages = Math.ceil(sortedRuns.length / RUNS_PER_PAGE)
   const startIndex = (currentPage - 1) * RUNS_PER_PAGE
   const endIndex = startIndex + RUNS_PER_PAGE
-  const currentRuns = runs.slice(startIndex, endIndex)
+  const currentRuns = sortedRuns.slice(startIndex, endIndex)
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -333,8 +343,28 @@ Turns: {point.turns}
     <div className="runs-container">
       <div className="runs-header">
         <h1>Run History</h1>
-        <div className="runs-count">
-          Showing {startIndex + 1}-{Math.min(endIndex, runs.length)} of {runs.length} runs
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="runs-count">
+            Showing {startIndex + 1}-{Math.min(endIndex, runs.length)} of {runs.length} runs
+          </div>
+          <select
+            value={sortOrder}
+            onChange={(e) => {
+              setSortOrder(e.target.value)
+              setCurrentPage(1)
+            }}
+            style={{
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid var(--border-color)',
+              background: 'var(--background)',
+              color: 'var(--text-primary)',
+              cursor: 'pointer'
+            }}
+          >
+            <option value="oldest">Oldest First</option>
+            <option value="newest">Newest First</option>
+          </select>
         </div>
       </div>
 
