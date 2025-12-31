@@ -502,3 +502,99 @@ h3 {
 .chart-container text {
   fill: var(--text-secondary);
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  nav {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  nav a {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-logo {
+    margin-right: 0;
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  .logo-image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .filters {
+    padding: 1rem;
+  }
+
+  .filters label {
+    width: 100%;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
+
+  .filters button {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card .value {
+    font-size: 2rem;
+  }
+
+  .runs-table {
+    font-size: 0.85rem;
+  }
+
+  .runs-table th,
+  .runs-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .chart-container,
+  .heatmap-container {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .top-correlations {
+    grid-template-columns: 1fr;
+  }
+}

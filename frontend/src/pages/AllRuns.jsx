@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import './AllRuns.css'
 import { API_URL } from '../config'
@@ -102,20 +102,25 @@ function AllRuns() {
     setTimeout(() => fetchRuns(), 0)
   }
 
-  // Sort runs based on sortOrder
-  const sortedRuns = [...runs].sort((a, b) => {
-    if (sortOrder === 'newest') {
-      return b.timestamp - a.timestamp
-    } else {
-      return a.timestamp - b.timestamp
-    }
-  })
+  // Sort runs based on sortOrder - memoized for performance
+  const sortedRuns = useMemo(() => {
+    return [...runs].sort((a, b) => {
+      if (sortOrder === 'newest') {
+        return b.timestamp - a.timestamp
+      } else {
+        return a.timestamp - b.timestamp
+      }
+    })
+  }, [runs, sortOrder])
 
-  // Pagination calculations
-  const totalPages = Math.ceil(sortedRuns.length / RUNS_PER_PAGE)
-  const startIndex = (currentPage - 1) * RUNS_PER_PAGE
-  const endIndex = startIndex + RUNS_PER_PAGE
-  const currentRuns = sortedRuns.slice(startIndex, endIndex)
+  // Pagination calculations - memoized for performance
+  const { totalPages, startIndex, endIndex, currentRuns } = useMemo(() => {
+    const total = Math.ceil(sortedRuns.length / RUNS_PER_PAGE)
+    const start = (currentPage - 1) * RUNS_PER_PAGE
+    const end = start + RUNS_PER_PAGE
+    const current = sortedRuns.slice(start, end)
+    return { totalPages: total, startIndex: start, endIndex: end, currentRuns: current }
+  }, [sortedRuns, currentPage])
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -442,6 +447,7 @@ Turns: {point.turns}
                       src={characterImages[run.character]}
                       alt={getCharacterName(run.character)}
                       className="character-image"
+                      loading="lazy"
                       onError={(e) => {
                         e.target.style.display = 'none'
                         e.target.nextSibling.style.display = 'flex'
