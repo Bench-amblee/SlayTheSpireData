@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import AllRuns from './pages/AllRuns'
 import Dashboard from './pages/Dashboard'
@@ -9,35 +10,52 @@ import Upload from './pages/Upload'
 import logoImage from './assets/ghost.png'
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
+  }
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+  }
+
   return (
     <Router>
       <div className="app">
         <nav>
-          <Link to="/" className="nav-logo">
-            <img src={logoImage} alt="Crimps Logo" className="logo-image" />
-            <span className="logo-text">Crimps</span>
-          </Link>
-          <ul>
+          <div className="nav-content">
+            <Link to="/" className="nav-logo" onClick={closeMenu}>
+              <img src={logoImage} alt="Crimps Logo" className="logo-image" />
+              <span className="logo-text">Crimps</span>
+            </Link>
+            <button className="hamburger" onClick={toggleMenu} aria-label="Toggle menu">
+              <span className={menuOpen ? 'open' : ''}></span>
+              <span className={menuOpen ? 'open' : ''}></span>
+              <span className={menuOpen ? 'open' : ''}></span>
+            </button>
+          </div>
+          <ul className={menuOpen ? 'open' : ''}>
             <li>
-              <Link to="/">All Runs</Link>
+              <Link to="/" onClick={closeMenu}>All Runs</Link>
             </li>
             <li>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
             </li>
             <li>
-              <Link to="/cards">Cards</Link>
+              <Link to="/cards" onClick={closeMenu}>Cards</Link>
             </li>
             <li>
-              <Link to="/enemies">Enemies</Link>
+              <Link to="/enemies" onClick={closeMenu}>Enemies</Link>
             </li>
             <li>
-              <Link to="/relics">Relics</Link>
+              <Link to="/relics" onClick={closeMenu}>Relics</Link>
             </li>
             <li>
-              <Link to="/advanced">Advanced Analytics</Link>
+              <Link to="/advanced" onClick={closeMenu}>Advanced Analytics</Link>
             </li>
             <li>
-              <Link to="/upload">Upload Runs</Link>
+              <Link to="/upload" onClick={closeMenu}>Upload Runs</Link>
             </li>
           </ul>
         </nav>
